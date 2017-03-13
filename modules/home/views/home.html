@@ -1,0 +1,142 @@
+<div >
+  <div class="row">
+    <form class="form-inline">
+    <div class="form-group">
+      <label class="sr-only" for="petId">Find by Pet ID</label>
+      <input type='text' ng-model='findId'>
+    </div>
+    <div class="form-group">
+      <label class="sr-only">Find</label>
+      <input type="button" class="btn btn-primary" value="Find Pet" ng-click="ButtonShow()" />
+    </div>
+    <div class="form-group">
+      <label class="sr-only">Add</label>
+      <input id="addButton" type="button" class="btn btn-success" value="Add a new Pet" onClick="formAdd();"/>
+    </div>
+  </form>
+</div>
+
+<br />
+  <div class="row">
+      <div class="col-md-6">
+          <i><span ng-bind="Message"></span></i>
+      </div>
+  </div>
+
+
+  <div class="row" id="listPets">
+    <h2>List of pet</h2>
+    <table class="table" border=0 >
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Pet Name</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="pet in listPets">
+            <td>{{ pet.id }}</td>
+            <td>{{ pet.name }}</td>
+            <td>{{ pet.status }}</td>
+            <td><a ng-click="ButtonShow(pet.id);">View</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+
+  <div class="row" id="formShow">
+
+      <hr />
+      <h2>Pet details</h2>
+      <div class="col-md-6">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label class="control-label col-sm-4" for="email">Pet ID :</label>
+            <div class="col-sm-4">
+              <span class="form-control"  ng-bind="petId"></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-4" for="pwd">Pet name :</label>
+            <div class="col-sm-4">
+              <span class="form-control"  ng-bind="petName"></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-4" for="pwd">Pet status :</label>
+            <div class="col-sm-4">
+              <span class="form-control"  ng-bind="petStatus"></span>
+            </div>
+          </div>
+
+          <input id="deleteButton" type="button" class="btn btn-danger" value="Delete Pet" ng-click="ButtonDelete()" />
+
+        </form>
+      </div>
+    </div>
+
+    <div id="formAdd">
+      <hr />
+  <form class="form-horizontal">
+  <div class="form-group">
+    <label class="control-label col-sm-4" >Pet name :</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" placeholder="Pet name" ng-model='name'>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-4" >Pet status :</label>
+    <div class="col-sm-4">
+      <div class="form-group">
+
+        <select class="form-control" ng-model="opt"
+                 ng-options="list1Status.title for list1Status in listStatus"
+                 >
+         </select>
+</div>
+    </div>
+  </div>
+
+
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-success" ng-click="ButtonAdd()">Add Pet</button>
+    </div>
+  </div>
+</form>
+</div>
+</div>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <a class="btn btn-danger" href="#/login" role="button">Logout from Petstore</a>
+    </div>
+</div>
+
+
+<script>
+function formAdd()
+{
+  $('#formAdd').show();
+  $("#formShow").hide();
+  $("#listPets").hide();
+  $("#_status option:first").attr('selected','selected');
+
+}
+
+function formShow()
+{
+  $('#formAdd').hide();
+  $("#formShow").show();
+}
+
+$('#formAdd').hide();
+$("#formShow").hide();
+$("#listPets").show();
+</script>
